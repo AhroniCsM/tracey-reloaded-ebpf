@@ -1,18 +1,18 @@
 # Tracey Reloaded
 
-Tracey Reloaded is a dummy Kubernetes-based application designed to generate logs, metrics and traces for a 'simulated' warehouse operations. It is intended to be used with OpenTelemetry for the collection of telemetry data and shipping on to Coralogix. The application consists of multiple services: 
+Tracey Reloaded is a dummy Kubernetes-based application designed to generate logs, metrics and traces for a 'simulated' warehouse operations. It is intended to be used with OpenTelemetry for the collection of telemetry data and shipping on to Coralogix. The application consists of multiple services:
 
 ## Architecture
 
 ### Services
 
-- **Warehouse Interface**: This service acts as the front-end interface for warehouse operations, it simulates order and stock requests on a loop and randomly generates errors. 
+- **Warehouse Interface**: This service acts as the front-end interface for warehouse operations, it simulates order and stock requests on a loop and randomly generates errors.
 
-- **Order Processor**: Responsible for processing orders, this service handles recieves HTTP requests from Warehouse Interface and communicates with the PostgreSQL database to add and remove orders. 
+- **Order Processor**: Responsible for processing orders, this service handles recieves HTTP requests from Warehouse Interface and communicates with the PostgreSQL database to add and remove orders.
 
-- **Stock Processor**: Responsible for processing stock, this service handles recieves HTTP requests from Warehouse Interface and communicates with the PostgreSQL database to add and remove stock. 
+- **Stock Processor**: Responsible for processing stock, this service handles recieves HTTP requests from Warehouse Interface and communicates with the PostgreSQL database to add and remove stock.
 
-- **PostgreSQL Database**: A centralized database service that stores has 2 tables, one for orders and one for stock. 
+- **PostgreSQL Database**: A centralized database service that stores has 2 tables, one for orders and one for stock.
 
 ![Tracey Reloaded Architecture Diagram](./images/tracey-reloaded-architecture.png "Architecture Diagram")
 
@@ -25,7 +25,7 @@ Tracey Reloaded is a dummy Kubernetes-based application designed to generate log
 
    Run the following command:
    ```
-   git clone https://github.com/georgep1ckers/tracey-reloaded.git
+   git clone https://github.com/AhroniCsM/tracey-reloaded-ebpf.git
    ```
 
 
