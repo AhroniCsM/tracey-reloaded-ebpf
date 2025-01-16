@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-interface-ebpf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: warehouse-interface-ebpf
+  template:
+    metadata:
+      labels:
+        app: warehouse-interface-ebpf
+    spec:
+      containers:
+      - name: warehouse-interface-ebpf
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/tracey-reloaded-ebpf:warehouse-interface-ebpf-v1
+        env:
+          - name: KUBE_NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: OTEL_HOST
+            value: "$(KUBE_NODE_NAME):4317"

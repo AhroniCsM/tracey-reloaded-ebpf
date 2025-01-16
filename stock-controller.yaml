@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stock-controller-ebpf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-controller-ebpf
+  template:
+    metadata:
+      labels:
+        app: stock-controller-ebpf
+    spec:
+      containers:
+      - name: stock-controller-ebpf
+        image: 104013952213.dkr.ecr.eu-north-1.amazonaws.com/tracey-reloaded-ebpf:stock-controller-ebpf
+        ports:
+        - containerPort: 8081
+        env:
+          - name: KUBE_NODE_NAME
+            valueFrom:
+              fieldRef:
+                apiVersion: v1
+                fieldPath: spec.nodeName
+          - name: OTEL_HOST
+            value: "$(KUBE_NODE_NAME):4317"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stock-controller
+spec:
+  selector:
+    app: stock-controller
+  ports:
+  - protocol: TCP
+    port: 8081
+    targetPort: 8081
